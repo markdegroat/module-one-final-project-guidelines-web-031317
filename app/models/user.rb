@@ -11,7 +11,7 @@ class User < ActiveRecord::Base
         puts "#{index+1}. #{ingredient.name}"
       end
     else
-      puts "Your fride is empty!"
+      puts "Your fridge is empty!"
     end
   end
 

@@ -10,6 +10,8 @@ class Recipe < ActiveRecord::Base
     fridge_ingredients = Set.new(ingredient_list)
 
 		Recipe.all.select do |recipe|
+			# recipe.ingredients == ingredient_list
+			#simplifying for testing
 			recipe_ingredients = Set.new(recipe.ingredients)
       recipe_ingredients.subset?(fridge_ingredients) && !recipe_ingredients.empty?
 		end

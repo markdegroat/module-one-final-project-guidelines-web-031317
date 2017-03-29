@@ -12,7 +12,7 @@
 
 ActiveRecord::Schema.define(version: 20170329133347) do
 
-  create_table "fridge", force: :cascade do |t|
+  create_table "fridges", force: :cascade do |t|
     t.integer "user_id"
     t.integer "ingredient_id"
   end

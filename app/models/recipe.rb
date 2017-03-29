@@ -5,6 +5,7 @@ class Recipe < ActiveRecord::Base
   has_many :users, through: :user_recipes
   has_many :user_recipes
 
+	#I MADE A CHANGE TESTING
 	def self.find_by_ingredient_list(ingredient_list)
     fridge_ingredients = Set.new(ingredient_list)
 

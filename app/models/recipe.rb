@@ -18,6 +18,13 @@ class Recipe < ActiveRecord::Base
 	def self.find_exact_match_by_ingredient_list
 	end
 
+	def print_recipe()
+		puts "Name: #{self.title}"
+		self.ingredients.each_with_index do |ingredient, index|
+		  puts "#{index + 1}: #{ingredient.name}"
+		end
+	end
+
 
 
 end

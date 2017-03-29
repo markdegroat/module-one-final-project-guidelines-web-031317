@@ -29,5 +29,11 @@ class User < ActiveRecord::Base
     self.ingredients
   end
 
+  def display_fridge
+    self.ingredients.each_with_index do |ingredient, index|
+      puts "#{index + 1}. #{ingredient.name}"
+    end
+  end
+
 
 end

@@ -15,4 +15,9 @@ class Recipe < ActiveRecord::Base
 		end
 	end
 
+	def self.find_exact_match_by_ingredient_list
+	end
+
+
+
 end

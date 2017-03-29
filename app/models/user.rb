@@ -6,8 +6,12 @@ class User < ActiveRecord::Base
   has_many :fridges
 
   def display_fridge
-    self.ingredients.each_with_index do |ingredient, index|
-      puts "#{index+1}. #{ingredient.name}"
+    if !self.fridge.empty?
+      self.ingredients.each_with_index do |ingredient, index|
+        puts "#{index+1}. #{ingredient.name}"
+      end
+    else
+      puts "Your fride is empty!"
     end
   end
 

@@ -18,11 +18,23 @@ when 1
   input_from_user = gets.chomp
   case input_from_user
   when 1
-    u
+    u.display_fridge
   when 2
     #add items to fridge
+    #this needs to be done better but w/e for now
+    input = nil
+    puts "Please enter the name of the item to add, or press q to exit"
+    while item_name != "q"
+      item_name = gets.chomp
+      u.add_ingredient_to_fridge(item_name)
+    end
+    u.display_fridge
+
+
   when 3
     #set fridge to []
+    u.ingredients.clear
+    u.display_fridge
   when 4
     #list items and allow them to delete singular ingredients from fridge
   else

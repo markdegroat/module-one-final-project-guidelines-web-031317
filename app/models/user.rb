@@ -22,7 +22,12 @@ class User < ActiveRecord::Base
     end
   end
 
+  def get_recipes_based_on_fridge
+  end
+
   def fridge
     self.ingredients
   end
+
+
 end

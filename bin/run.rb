@@ -9,6 +9,7 @@ while !u
   u = User.find_or_create_by(name: username)
 end
 puts "Enter 1 to edit and view your fridge."
+puts "Enter 2 to add a new recipe to the database."
 input_from_user = gets.chomp
 case input_from_user
 when "1"
@@ -72,7 +73,14 @@ when "1"
     end#end of inner nested case
   end#end of while
 when "2"
-  #do
+  puts "Enter 2 to add a recipe to your Recipe List."
+  puts "Enter new recipe title:"
+  recipe_title = gets.chomp
+  recipe = Recipe.create_new_recipe(recipe_title)
+  puts "Enter the ingredients for the recipe separated by commas"
+  recipe_ingredients = gets.chomp.strip.split(",").collect {|ingredient| ingredient.strip}
+  recipe.add_ingredients_to_recipe(recipe_ingredients)
+  recipe.print_recipe
 else
   puts "That is not a valid input! Please try again."
 end#end of outer nested case statement

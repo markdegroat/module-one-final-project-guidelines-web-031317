@@ -26,6 +26,17 @@ class User < ActiveRecord::Base
     end
   end
 
+  def add_recipe_to_saved_recipes(recipe_title)
+    recipe = Recipe.find_or_create_by(title: recipe_title)
+    if !!recipe && self.recipes.contains(title: recipe_title)
+      self.recipes << recipe
+      self.save
+    else
+      self.recipes.build(title: recipe_title)
+      self.save
+    end
+  end
+
   def get_recipes_based_on_fridge
   end
 
@@ -38,6 +49,18 @@ class User < ActiveRecord::Base
       puts "#{index + 1}. #{ingredient.name}"
     end
   end
+
+  def display_saved_recipes
+    self.recipes.each_with_index do |recipe, index|
+      binding.pry
+      puts "#{index + 1}. #{recipe.title}"
+      puts "#{recipe.directions}"
+    end
+  end
+
+  def delete_recipes
+  end
+
 
 
 end

@@ -54,6 +54,18 @@ class Recipe < ActiveRecord::Base
 		end
 	end
 
+	def add_ingredient_to_recipe(ingredient_name)
+		ingredient = Ingredient.find_or_create_by(name: ingredient_name)
+		if !!ingredient
+			self.ingredients << ingredient
+			self.save
+		else
+			self.ingredients.build(name: ingredient_name)
+			self.save
+		end
+	end
+
+
 
 
 end

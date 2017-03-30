@@ -18,7 +18,9 @@ when "1"
     puts "Press 2 to add items to your fridge."
     puts "Press 3 to clear your fridge."
     puts "Press 5 to return recipes you can make."
-    puts "Press q to quit to main menu"
+    puts "Press 6 to see your saved recipes."
+    puts "Press 7 to clear your saved recipes."
+    puts "Press q to quit to main menu."
     input_from_user = gets.chomp
     case input_from_user
     when "1"
@@ -50,7 +52,21 @@ when "1"
       #LIKELY ANSWER IS that the names match, but duplicate ingredients are able to be added
       #and that is resulting in differing id's but same names
       recipes = Recipe.find_by_ingredient_list(u.fridge)
-      puts recipes.first.title
+      if recipes.length != 0#this means we found recipes
+        puts recipes.first.title
+        puts "Would you like to save this recipe?"
+        input = gets.chomp
+        if input == "yes"
+          u.add_recipe_to_saved_recipes(recipes.first.title)
+          puts "Recipe saved."
+        end
+      else#this means we didn't
+        puts "You can't make any recipes based on your fridge."
+      end
+    when "6"
+      u.display_saved_recipes
+    when "7"
+      u.recipes.clear
     else
       puts "That is not valid input please try again."
     end#end of inner nested case

@@ -16,7 +16,7 @@ class User < ActiveRecord::Base
   end
 
   def add_ingredient_to_fridge(ingredient_name)
-    ingredient = Ingredient.find_by_name(ingredient_name)
+    ingredient = Ingredient.find_or_create_by(name: ingredient_name)
     if !!ingredient
       self.ingredients << ingredient
       self.save

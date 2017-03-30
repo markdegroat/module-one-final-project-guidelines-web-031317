@@ -20,6 +20,14 @@ class Recipe < ActiveRecord::Base
 	def self.find_exact_match_by_ingredient_list
 	end
 
+	def self.create_new_recipe(recipe_title)
+		while self.exists?(:title => recipe_title)
+  		puts "This recipe already exists in the database! Please enter a different recipe title:"
+  		recipe_title = gets.chomp
+		end
+		self.create(title: recipe_title)
+	end
+
 	def print_recipe()
 		puts "Name: #{self.title}"
 		self.ingredients.each_with_index do |ingredient, index|

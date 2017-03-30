@@ -28,6 +28,13 @@ class Recipe < ActiveRecord::Base
 		self.create(title: recipe_title)
 	end
 
+	def add_ingredients_to_recipe(recipe_ingredients)
+		recipe_ingredients.each do |ingredient_name|
+			ingredient = Ingredient.find_or_create_by(name: ingredient_name)
+  		self.ingredients << ingredient
+		end
+	end
+
 	def print_recipe()
 		puts "Name: #{self.title}"
 		self.ingredients.each_with_index do |ingredient, index|

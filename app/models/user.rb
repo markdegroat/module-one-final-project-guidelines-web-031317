@@ -16,14 +16,23 @@ class User < ActiveRecord::Base
   end
 
   def add_ingredient_to_fridge(ingredient_name)
-    ingredient = Ingredient.find_or_create_by(name: ingredient_name)
-    if !!ingredient
+    ingredient = Ingredient.where("name LIKE ?", "%#{ingredient_name}%")
+    if ingredient.any?
       self.ingredients << ingredient
       self.save
     else
-      self.ingredients.build(name: ingredient_name)
+      self.ingredients << Ingredient.create(name: ingredient_name)
       self.save
     end
+
+    # ingredient = Ingredient.find_or_create_by(name: ingredient_name)
+    # if !!ingredient
+    #   self.ingredients << ingredient
+    #   self.save
+    # else
+    #   self.ingredients.build(name: ingredient_name)
+    #   self.save
+    # end
   end
 
   def add_recipe_to_saved_recipes(recipe_title)

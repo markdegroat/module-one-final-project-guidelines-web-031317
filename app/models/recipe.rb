@@ -31,7 +31,6 @@ class Recipe < ActiveRecord::Base
 	def add_ingredients_to_recipe(recipe_ingredients)
     recipe_ingredients.each do |ingredient_name|
       ingredient = Ingredient.where("name LIKE ?", "%#{ingredient_name}%")
-      puts ingredient
 
       if ingredient.any?
         self.ingredients << ingredient
@@ -39,7 +38,6 @@ class Recipe < ActiveRecord::Base
       else
         self.ingredients << Ingredient.create(name: ingredient_name)
         self.save
-        puts "ELSEEEE"
       end
     end
 

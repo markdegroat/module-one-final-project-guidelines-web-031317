@@ -29,11 +29,23 @@ class Recipe < ActiveRecord::Base
 	end
 
 	def add_ingredients_to_recipe(recipe_ingredients)
-		recipe_ingredients.each do |ingredient_name|
-			ingredient = Ingredient.find_or_create_by(name: ingredient_name)
-  		self.ingredients << ingredient
-		end
-	end
+    recipe_ingredients.each do |ingredient_name|
+      ingredient = Ingredient.where("name LIKE ?", "%#{ingredient_name}%")
+      puts ingredient
+
+      if ingredient.any?
+        self.ingredients << ingredient
+        self.save
+      else
+        self.ingredients << Ingredient.create(name: ingredient_name)
+        self.save
+        puts "ELSEEEE"
+      end
+    end
+
+    # ingredient = Ingredient.find_or_create_by(name: ingredient_name)
+    # self.ingredients << ingredient
+  end
 
 	def print_recipe()
 		puts "Name: #{self.title}"

@@ -74,7 +74,7 @@ class User < ActiveRecord::Base
 
   def display_saved_recipes
     self.recipes.each_with_index do |recipe, index|
-      binding.pry
+      #binding.pry
       puts "#{index + 1}. #{recipe.title}"
       puts "#{recipe.directions}"
     end

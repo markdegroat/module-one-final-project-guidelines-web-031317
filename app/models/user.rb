@@ -53,7 +53,8 @@ class User < ActiveRecord::Base
 
   def add_recipe_to_saved_recipes(recipe_title)
     recipe = Recipe.find_or_create_by(title: recipe_title)
-    if !!recipe && self.recipes.contains(title: recipe_title)
+    #instead use a where search
+    if !!recipe && self.recipes.include?(title: recipe_title)
       self.recipes << recipe
       self.save
     else
@@ -80,6 +81,7 @@ class User < ActiveRecord::Base
   end
 
   def delete_recipes
+    #FEATURE NOT YET IMPLEMENTED
   end
 
 

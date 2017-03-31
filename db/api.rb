@@ -11,8 +11,10 @@ class String
   end
 end
 
+#ingredient string wrapper class, initialize with a string instead of monkey patching
 
-SEARCH_TERMS = ["chicken", "eggs", "beef","pork", "carribean", "greek", "mexican", "italian", "vegetarian", "vegan"]
+
+SEARCH_TERMS = ["chicken" , "eggs", "beef","pork", "carribean", "greek", "mexican", "italian", "vegetarian", "vegan"]
 #https://api.edamam.com/search?q=chicken&app_id=${81a71c4e}&app_key=${52085f9209f9d0b19ee7a21fb9f0cdd6}
 SEARCH_TERMS.each do |term|
 
@@ -36,13 +38,16 @@ SEARCH_TERMS.each do |term|
   data["hits"].each do |hit|
 
     r = Recipe.find_or_create_by(title: hit["recipe"]["label"])
-
+    r.directions = hit["recipe"]["url"]
+    r.save
+    #binding.pry
     hit["recipe"]["ingredients"].each do |ingredient|
-      ingredient = Ingredient.where("name LIKE ?", "%#{ingredient["text"].strip_ingredient_list}%").first
-      if !!ingredient
-        r.ingredients << ingredient
+      ingredient_var = Ingredient.where("name LIKE ?", "%#{ingredient["text"].strip_ingredient_list}%").first
+      if !!ingredient_var
+        r.ingredients << ingredient_var
         r.save
       else
+        #binding.pry
         r.ingredients.build(name: ingredient["text"].strip_ingredient_list)
       end
     end

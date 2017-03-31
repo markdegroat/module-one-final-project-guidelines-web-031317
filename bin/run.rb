@@ -62,21 +62,27 @@ while input_from_user != "q" || "Q"
         if recipes.length != 0#this means we found recipes
           #loop through "recipes"
           #display the list of recipes with numbers
+          recipes.each_with_index do |recipe, index|
+            puts "#{index + 1}. #{recipe.title}"
+          end
           #please enter the number of recipe you want to open
+          puts "Please enter the number of the recipe you would like to view:"
           #recipe_number = gets.chomp
-          recipes[recipe_number+1]
-          
-          puts recipes.first.title
-          puts "Would you like to save this recipe?"
-          input = gets.chomp
-          if input == "yes"
-            u.add_recipe_to_saved_recipes(recipes.first.title)
+          recipe_number = gets.chomp.to_i    
+          puts recipes[recipe_number+1].print_recipe
+          #puts recipes.first.title
+
+          puts "Would you like to save this recipe? Please enter Y or N:"
+          input = gets.chomp.upcase
+          if input == "Y"
+            u.add_recipe_to_saved_recipes(recipes[recipe_number+1])
+            #u.add_recipe_to_saved_recipes(recipes.first.title)
             puts "Recipe saved."
           end
-          puts "Would you like to view this recipe?"
-          input = gets.chomp
-          if input == "yes"
-            recipes.first.open_recipe_directions
+          puts "Would you like to view this recipe? Please enter Y or N:"
+          input = gets.chomp.upcase
+          if input == "Y"
+            recipes[recipe_number+1].open_recipe_directions
           end
 
         else#this means we didn't

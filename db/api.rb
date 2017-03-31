@@ -6,7 +6,7 @@ class String
     #[2, 6, 13, 99, 27].any? { |i| [6, 13].include? i }
     #possibly use regex to combine this query
     self.split(/[\s,()]/).reject do |string|
-      string.include?("tablespoon")  || string.include?("teaspoon") || string.include?("cup") || /\A\d+\z/.match(string) ||  string.include?("(") || string.include?(")") || string.include?(",") || string.include?("/") || string.include?("-")
+      string.include?("tablespoon")  || string.include?("teaspoon") || string.include?("cup") || /\A\d+\z/.match(string) ||  string.include?("(") || string.include?(")") || string.include?(",") || string.include?("/") || string.include?("-") || string.include?("about")
     end.join(' ')
   end
 end
@@ -14,7 +14,7 @@ end
 #ingredient string wrapper class, initialize with a string instead of monkey patching
 
 
-SEARCH_TERMS = ["chicken" , "eggs", "beef","pork", "carribean", "greek", "mexican", "italian", "vegetarian", "vegan"]
+SEARCH_TERMS = ["chicken" , "eggs", "beef","pork", "carribean", "greek", "mexican", "italian", "vegetarian", "vegan",]
 #https://api.edamam.com/search?q=chicken&app_id=${81a71c4e}&app_key=${52085f9209f9d0b19ee7a21fb9f0cdd6}
 SEARCH_TERMS.each do |term|
 

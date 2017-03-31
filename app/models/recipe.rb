@@ -58,6 +58,7 @@ class Recipe < ActiveRecord::Base
 		self.ingredients.each_with_index do |ingredient, index|
 		  puts "#{index + 1}: #{ingredient.name}"
 		end
+		puts "****************************"
 	end
 
 	def add_ingredient_to_recipe(ingredient_name)

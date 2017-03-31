@@ -60,6 +60,12 @@ while input_from_user != "q" || "Q"
         #and that is resulting in differing id's but same names
         recipes = Recipe.find_by_ingredient_list(u.fridge)
         if recipes.length != 0#this means we found recipes
+          #loop through "recipes"
+          #display the list of recipes with numbers
+          #please enter the number of recipe you want to open
+          #recipe_number = gets.chomp
+          recipes[recipe_number+1]
+          
           puts recipes.first.title
           puts "Would you like to save this recipe?"
           input = gets.chomp
@@ -67,6 +73,12 @@ while input_from_user != "q" || "Q"
             u.add_recipe_to_saved_recipes(recipes.first.title)
             puts "Recipe saved."
           end
+          puts "Would you like to view this recipe?"
+          input = gets.chomp
+          if input == "yes"
+            recipes.first.open_recipe_directions
+          end
+
         else#this means we didn't
           puts "You can't make any recipes based on your fridge."
         end

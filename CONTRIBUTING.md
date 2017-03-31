@@ -1,4 +1,4 @@
-# Contributing to What's In Your Fridge
+# Contributing to What's In Your Fridge?
 
 If this is your first time contributing, please continue reading to learn how 
 to make the most meaningful and useful impact possible.

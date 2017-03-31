@@ -1,11 +1,16 @@
 class User < ActiveRecord::Base
+
+  #QUERIES = []
+  #this will be used when we refactor the display_fridge method
   has_many :recipes, through: :user_recipes
   has_many :user_recipes
 
   has_many :ingredients, through: :fridges
   has_many :fridges
 
+
   def display_fridge
+
     if !self.fridge.empty?
       self.ingredients.each_with_index do |ingredient, index|
         puts "#{index+1}. #{ingredient.name}"
@@ -13,9 +18,20 @@ class User < ActiveRecord::Base
     else
       puts "Your fridge is empty!"
     end
+
+    # if !QUERIES.empty?
+    #   QUERIES.each_with_index do |query, index|
+    #     puts "#{index+1}. #{query}"
+    #   end
+    # else
+    #   puts "Your fridge is empty!"
+    # end
+
   end
 
   def add_ingredient_to_fridge(ingredient_name)
+    #QUERIES << ingredient_name
+    #this is needed for when we refactor the display_fridge method
     ingredient = Ingredient.where("name LIKE ?", "%#{ingredient_name}%")
     if ingredient.any?
       self.ingredients << ingredient
@@ -53,11 +69,7 @@ class User < ActiveRecord::Base
     self.ingredients
   end
 
-  def display_fridge
-    self.ingredients.each_with_index do |ingredient, index|
-      puts "#{index + 1}. #{ingredient.name}"
-    end
-  end
+
 
   def display_saved_recipes
     self.recipes.each_with_index do |recipe, index|

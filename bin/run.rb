@@ -7,12 +7,16 @@ while !u
   puts "Please login with your username."
   username = gets.chomp
   u = User.find_or_create_by(name: username)
+  #implement a password for users here
 end
-puts "Enter 1 to edit and view your fridge."
-puts "Enter 2 to add a new recipe to the database."
-puts "Enter q to quit the program."
-input_from_user = gets.chomp
+
+
+input_from_user = nil
 while input_from_user != "q" || "Q"
+  puts "Enter 1 to edit and view your fridge."
+  puts "Enter 2 to add a new recipe to the database."
+  puts "Enter q to quit the program."
+  input_from_user = gets.chomp
   case input_from_user
   when "1"
     #do
@@ -70,6 +74,10 @@ while input_from_user != "q" || "Q"
         u.display_saved_recipes
       when "7"
         u.recipes.clear
+      when "q"
+        break
+      when "Q"
+        break
       else
         puts "That is not valid input please try again."
       end#end of inner nested case
@@ -83,6 +91,10 @@ while input_from_user != "q" || "Q"
     recipe_ingredients = gets.chomp.strip.split(",").collect {|ingredient| ingredient.strip}
     recipe.add_ingredients_to_recipe(recipe_ingredients)
     recipe.print_recipe
+  when "q"
+    break
+  when "Q"
+    break
   else
     puts "That is not a valid input! Please try again."
   end#end of outer nested case statement

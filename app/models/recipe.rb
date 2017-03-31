@@ -28,6 +28,14 @@ class Recipe < ActiveRecord::Base
 		self.create(title: recipe_title)
 	end
 
+	def open_recipe_directions
+		if !!self.directions
+			Launchy.open(self.directions)
+		else
+			puts "This recipe doesn't have any saved directions! Sorry!"
+		end
+	end
+
 	def add_ingredients_to_recipe(recipe_ingredients)
     recipe_ingredients.each do |ingredient_name|
       ingredient = Ingredient.where("name LIKE ?", "%#{ingredient_name}%")
